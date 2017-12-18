@@ -14,41 +14,46 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class GetScript {
-	
-	private static final String rootPath = "/Users/songmingu/Documents/w5test";
-	private static final String savePath = rootPath + "/../_xmlscript/";
-	
+	private static String rootPath = "/Users/songmingu/Documents/w5test/GetScriptTest";
+	private static String savePath = rootPath + "_js";
 
 	public static void main(String[] args) {
-		File targetDir = new File(savePath);
-		recursiveDelete(targetDir);
+		if(args.length > 0){
+			rootPath = args[0];
+			savePath = rootPath + "_js";
+		}
 		
+		File targetDir = new File(savePath);
+		removeFolder(targetDir);
         if(!targetDir.exists()) {    //디렉토리 없으면 생성.
         	targetDir.mkdirs();
+        	System.out.println("output path : " + savePath);
         }
         
 		File file = new File(rootPath);
+		if(!file.exists()){
+			System.out.println("this path not exists : " + rootPath);
+			return;
+		}
+
 		File[] fileList = file.listFiles();
 		for (int i = 0; i < fileList.length; i++) {
 			makeJs(fileList[i], savePath);	
 		}
+		
+		System.out.println("== get script Success ==");
 	}
 
-    public static void recursiveDelete(File file) {
-        //to end the recursive loop
+    public static void removeFolder(File file) {
         if (!file.exists())
             return;
          
-        //if directory, go inside and call recursively
         if (file.isDirectory()) {
             for (File f : file.listFiles()) {
-                //call recursively
-                recursiveDelete(f);
+                removeFolder(f);
             }
         }
-        //call delete to delete files and empty directory
         file.delete();
-        //System.out.println("Deleted file/folder: "+file.getAbsolutePath());
     }
 	
 	private static void makeJs(File file, String savePath){
@@ -64,13 +69,11 @@ public class GetScript {
 	        }
 			
 			File[] fileList = file.listFiles();
-			int xmlcnt = 0;
 			for (int i = 0; i < fileList.length; i++) {
 				makeJs(fileList[i], path);
 				
 				String name2 = fileList[i].getName();
 				if(name2.endsWith("xml")){
-					xmlcnt++;
 				}
 			}
 			
@@ -89,7 +92,6 @@ public class GetScript {
 				//System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 				
 				NodeList nList = doc.getElementsByTagName("script");
-				//System.out.println("-----------------------");
 
 				String script = "";
 				for (int temp = 0; temp < nList.getLength(); temp++) {
