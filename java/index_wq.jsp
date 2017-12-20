@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-%><%@page import="java.util.Enumeration
+    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+    %><%@page import="java.util.Enumeration
 										,java.io.File
 										,java.util.ArrayList
 										,java.util.Arrays
 										,java.net.*
 										,test.*"
-%><%
+        %><%
 	InetAddress addr;
 	String local_ip = "";
 	try {
@@ -67,46 +67,47 @@
 	Arrays.sort(engineList);
 
 
-%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge"></meta>
-	<title>예제 목록</title>
+        <html>
+        <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"></meta>
+        <title>예제 목록</title>
 
-	<script type="text/javascript">
-		function openWindow(websquareURL){
-			var websquareVersion = document.engine.version.value;
-			if(websquareVersion != ""){
-				window.open("http://<%=local_ip%>:8080/" + websquareVersion + websquareURL);
-			}else{
-				window.open("http://<%=local_ip%>:8080/" + websquareURL);
-			}
-		}
-
-
-		function setEngine(obj){
-			document.getElementById("engineVer").innerHTML = obj.value;
-		}
+        <script type="text/javascript">
+        function openWindow(websquareURL){
+        var websquareVersion = document.engine.version.value;
+        if(websquareVersion != ""){
+        window.open("http://<%=local_ip%>:8080/" + websquareVersion + websquareURL);
+        }else{
+        window.open("http://<%=local_ip%>:8080/" + websquareURL);
+        }
+        }
 
 
-window.onload = function(){
-	document.getElementById("engineVer").innerHTML = document.getElementById("version").value
-}
+        function setEngine(obj){
+        document.getElementById("engineVer").innerHTML = obj.value;
+        }
 
-	</script>
-</head>
-<body>
-<%
+
+        window.onload = function(){
+        document.getElementById("engineVer").innerHTML = document.getElementById("version").value
+        }
+
+        </script>
+        </head>
+        <body>
+            <%
 
 if(fff.isDirectory()){
 %>
-	<h2><%="Dir >"+directory%></h2>
-	<form name="engine" id="engine">
-		<h3>엔진 버전 :
-			<select name="version" id="version" onchange="setEngine(this)">
-				<%
+        <h2><%="Dir >"+directory%></h2>
+        <form name="engine" id="engine">
+        <h3>엔진 버전 :
+        <select name="version" id="version" onchange="setEngine(this)">
+            <%
 				//System.out.println("engineList.length = " + engineList.length);
 				String ver = xmlFilePath.indexOf("5") == -1 ? "2_" : "5_";
 
@@ -121,24 +122,24 @@ if(fff.isDirectory()){
 							if(engineList[i+1].indexOf(ver) < 0){
 								//System.out.println("test "+ i );
 							%>
-								<option selected value="<%=engineList[i] %>"><%=engineList[i] %></option>
-							<%
+        <option selected value="<%=engineList[i] %>"><%=engineList[i] %></option>
+            <%
 							}else{
 							%>
-							<option value="<%=engineList[i] %>"><%=engineList[i] %></option>
-							<%
+        <option value="<%=engineList[i] %>"><%=engineList[i] %></option>
+            <%
 							}
 						}
 					}
 				}
 				%>
-			</select>
-			<span id="engineVer"></span>
-		</h3>
-	</form>
+        </select>
+        <span id="engineVer"></span>
+        </h3>
+        </form>
 
-	<ul>
-<%if(!xmlFilePath.equals("/")){
+        <ul>
+            <%if(!xmlFilePath.equals("/")){
 	String temp001 = directory.substring(0, directory.lastIndexOf(System.getProperty("file.separator")));
 
 	String[] tempArr = xmlFilePath.split("/");
@@ -153,8 +154,9 @@ if(fff.isDirectory()){
 	//System.out.println("2>temp003>>>"+temp003+"<<<");
 
 %>
-		<li><font size="4"><a style="font-weight:bold;" href="<%=contextPath%><%=curentFilePath%>?directory=<%=temp001%>&xmlFilePath=<%=contextPath + temp002 %>"><%="상위>>> .."%></a></li>
-<%
+        <li><font size="4"><a style="font-weight:bold;" href="<%=contextPath%>
+            <%=curentFilePath%>?directory=<%=temp001%>&xmlFilePath=<%=contextPath + temp002 %>"><%="상위>>> .."%></a></li>
+            <%
 }
 	String fileList[] = fff.list();
 	for(String temp : fileList){
@@ -170,8 +172,12 @@ if(fff.isDirectory()){
 				&& !temp.equals("")&& !temp.equals(".settings")
 			){
 %>
-			<li><font size="3"><a style="color:red;" href="<%=contextPath%><%=curentFilePath%>?directory=<%=directory + System.getProperty("file.separator") + temp%>&xmlFilePath=<%=contextPath + xmlFilePath + temp + "/"%>"><%="<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-k0j-1sClb4KoymlxLV3J-6nybrCvSWqtcHVSbC2PssNZi7O' width='20px'>"+ temp%></a></li>
-<%
+        <li><font size="3"><a style="color:red;" href="<%=contextPath%>
+            <%=curentFilePath%>?directory=<%=directory + System.getProperty("file.separator") + temp%>
+        &xmlFilePath=<%=contextPath + xmlFilePath + temp + "/"%>
+        "><%="<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-k0j-1sClb4KoymlxLV3J-6nybrCvSWqtcHVSbC2PssNZi7O' width='20px'>"+ temp%>
+        </a></li>
+            <%
 			}
 		}else{
 			// extension filter
@@ -181,28 +187,30 @@ if(fff.isDirectory()){
 				// websquare.jsp 로 실행해야 할 예제 폴더명
 				if( "/form/".equals(xmlFilePath) ){
 %>
-			<li><font size="3"><a style="color:blue;" href="#" onclick="openWindow('<%=contextPath%>/websquare/websquare.jsp?w2xPath=<%=xmlFilePath + temp%>');"><%=temp%></a></font></li>
-<%
+        <li><font size="3"><a style="color:blue;" href="#" onclick="openWindow('<%=contextPath%>
+        /websquare/websquare.jsp?w2xPath=<%=xmlFilePath + temp%>');"><%=temp%></a></font></li>
+            <%
 				}else{
 %>
-			<li><font size="3"><a style="color:blue;" href="#" onclick="openWindow('<%=contextPath%>/websquare/websquare.html?w2xPath=<%=xmlFilePath + temp%>');"><%=temp%></a></font></li>
-<%
+        <li><font size="3"><a style="color:blue;" href="#" onclick="openWindow('<%=contextPath%>
+        /websquare/websquare.html?w2xPath=<%=xmlFilePath + temp%>');"><%=temp%></a></font></li>
+            <%
 				}
 			}else if(extensionStr.equals("html") || extensionStr.equals("HTML")){
 %>
-			<li><a target="_blank" href="<%=contextPath + xmlFilePath + temp%>"><%="예제>"+temp%></a></li>
-<%
+        <li><a target="_blank" href="<%=contextPath + xmlFilePath + temp%>"><%="예제>"+temp%></a></li>
+            <%
 			}
 		}
 	}
 %>
-	</ul>
-<%
+        </ul>
+            <%
 }else{
 %>
-	<h1><%=directory + " 는 디렉터리가 아닙니다"%></h1>
-<%
+        <h1><%=directory + " 는 디렉터리가 아닙니다"%></h1>
+            <%
 }
 %>
-</body>
-</html>
+        </body>
+        </html>
