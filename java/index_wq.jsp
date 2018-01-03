@@ -1,4 +1,4 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     %><%@page import="java.util.Enumeration
 										,java.io.File
 										,java.util.ArrayList
@@ -172,10 +172,8 @@ if(fff.isDirectory()){
 				&& !temp.equals("")&& !temp.equals(".settings")
 			){
 %>
-        <li><font size="3"><a style="color:red;" href="<%=contextPath%>
-            <%=curentFilePath%>?directory=<%=directory + System.getProperty("file.separator") + temp%>
-        &xmlFilePath=<%=contextPath + xmlFilePath + temp + "/"%>
-        "><%="<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-k0j-1sClb4KoymlxLV3J-6nybrCvSWqtcHVSbC2PssNZi7O' width='20px'>"+ temp%>
+        <li><font size="3"><a style="color:red;" href="<%=contextPath%><%=curentFilePath%>?directory=<%=directory + System.getProperty("file.separator") + temp%>
+        &xmlFilePath=<%=contextPath + xmlFilePath + temp + "/"%>"><%="<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-k0j-1sClb4KoymlxLV3J-6nybrCvSWqtcHVSbC2PssNZi7O' width='20px'>"+ temp%>
         </a></li>
             <%
 			}
@@ -187,13 +185,11 @@ if(fff.isDirectory()){
 				// websquare.jsp 로 실행해야 할 예제 폴더명
 				if( "/form/".equals(xmlFilePath) ){
 %>
-        <li><font size="3"><a style="color:blue;" href="#" onclick="openWindow('<%=contextPath%>
-        /websquare/websquare.jsp?w2xPath=<%=xmlFilePath + temp%>');"><%=temp%></a></font></li>
+        <li><font size="3"><a style="color:blue;" href="#" onclick="openWindow('<%=contextPath%>/websquare/websquare.jsp?w2xPath=<%=xmlFilePath + temp%>');"><%=temp%></a></font></li>
             <%
 				}else{
 %>
-        <li><font size="3"><a style="color:blue;" href="#" onclick="openWindow('<%=contextPath%>
-        /websquare/websquare.html?w2xPath=<%=xmlFilePath + temp%>');"><%=temp%></a></font></li>
+        <li><font size="3"><a style="color:blue;" href="#" onclick="openWindow('<%=contextPath%>/websquare/websquare.html?w2xPath=<%=xmlFilePath + temp%>');"><%=temp%></a></font></li>
             <%
 				}
 			}else if(extensionStr.equals("html") || extensionStr.equals("HTML")){
