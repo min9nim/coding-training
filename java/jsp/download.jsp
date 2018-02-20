@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><%
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%
 	request.setCharacterEncoding("UTF-8");
 %><%@ page import="java.io.*
 				, java.util.*
@@ -10,9 +9,9 @@
 	String orgFilename = request.getParameter("orgFilename");
 
 	/* --------------------------- log ----------------------------- */
-	System.out.println(" filePath : " + filePath);
-	System.out.println(" fileName : " + fileName);
-	System.out.println(" orgFilename : " + orgFilename);
+	System.out.println("@ filePath : " + filePath);
+	System.out.println("@ fileName : " + fileName);
+	System.out.println("@ orgFilename : " + orgFilename);
 
 	/* ------------------------------------------------------------- */
 
@@ -22,12 +21,13 @@
 		filePath = "";
 	
 	try {
-		File file = new File(filePath + fileName);
-		byte b[] = new byte[(int) file.length()];
-		fileName = new String(fileName.getBytes("euc-kr"), "8859_1");
-		response.setHeader("Content-Disposition", "attachment;filename=" + orgFilename);
-		
+		File file = new File(filePath + File.separator + fileName);
 		if (file.isFile()) {
+			byte b[] = new byte[(int) file.length()];
+			fileName = new String(fileName.getBytes("euc-kr"), "8859_1");
+			orgFilename = java.net.URLEncoder.encode(orgFilename, "UTF-8");
+			response.setHeader("Content-Disposition", "attachment;filename=" + orgFilename);
+
 			BufferedInputStream fin = new BufferedInputStream(new FileInputStream(file));
 			BufferedOutputStream outs = new BufferedOutputStream(response.getOutputStream());
 			int read = 0;
