@@ -92,11 +92,16 @@ public class ServiceDesk extends Task {
 				} else if (rowStatus.equals("E")) {
 					humsd01Handler.deleteHUMSD01(row);
 					
-					// 파일삭제
+					// 물리적인 파일삭제
 					deleteFiles(row);
 					
-					// DB삭제
-					humsd02Handler.deletByReqNo(row);
+					// HUMSD02(첨부파일) 테이블 정리
+					//humsd02Handler.deletByReqNo(row);
+
+					/*
+					 HUMSD02, HUMSD03, HUMSD05 테이블의 ON DELETE CASCADE 설정이 되어있기 때문에
+					 HUMSD01 에서 삭제되는 reqNo를 참조하는 해당 테이블의 모든 row는 DB상에서 자동으로 삭제처리 됨
+					 */ 
 				}
 			}
 			

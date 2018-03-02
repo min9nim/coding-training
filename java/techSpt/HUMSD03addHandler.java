@@ -45,7 +45,7 @@ public class HUMSD03addHandler extends Handler {
 								+ " `reqNo`, " 
 								+ " `resTime`, " 
 								+ " `resNm`, " 
-								+ " `resSabun`, " 
+								+ " `resId`, " 
 								+ " `resDesc`) " 
 						+ " VALUES (?, ?, ?, ?, ?); ";
 			pstmt = conn.prepareStatement(query);
@@ -53,7 +53,7 @@ public class HUMSD03addHandler extends Handler {
 			pstmt.setString(seq++, getString(doc, "reqNo"));
 			pstmt.setString(seq++, getString(doc, "resTime"));
 			pstmt.setString(seq++, getString(doc, "resNm"));
-			pstmt.setString(seq++, getString(doc, "resSabun"));
+			pstmt.setString(seq++, getString(doc, "resId"));
 			pstmt.setString(seq++, getString(doc, "resDesc"));
 
 			int i = pstmt.executeUpdate();
@@ -102,7 +102,7 @@ public class HUMSD03addHandler extends Handler {
 				setString(result, "reqNo", rs.getString("reqNo"));
 				setString(result, "resTime", rs.getString("resTime"));
 				setString(result, "resNm", rs.getString("resNm"));
-				setString(result, "resSabun", rs.getString("resSabun"));
+				setString(result, "resId", rs.getString("resId"));
 				setString(result, "resDesc", rs.getString("resDesc"));
 				list.addElement(result);
 			}
@@ -175,7 +175,7 @@ public class HUMSD03addHandler extends Handler {
 			        "  reqNo = ?,		" +
 			        "  resTime = ?,		" +
 			        "  resNm = ?,		" +
-			        "  resSabun = ?,		" +
+			        "  resId = ?,		" +
 			        "  resDesc = ?		" +
 			        "WHERE seq = ?		";			
 	   pstmt = conn.prepareStatement(query);
@@ -184,7 +184,7 @@ public class HUMSD03addHandler extends Handler {
 	   pstmt.setString(seq++, getString( doc, "reqNo") );
 	   pstmt.setString(seq++, getString( doc, "resTime") );
 	   pstmt.setString(seq++, getString( doc, "resNm") );
-	   pstmt.setString(seq++, getString( doc, "resSabun") );
+	   pstmt.setString(seq++, getString( doc, "resId") );
 	   pstmt.setString(seq++, getString( doc, "resDesc") );
 	   pstmt.setLong(seq++, getLong( doc, "seq") );
 	   
