@@ -1,0 +1,58 @@
+<%@page contentType="application/json;charset=UTF-8"
+	session="false"
+    import="java.net.*,java.io.*"
+%><%
+
+
+String url    =  "https://partners.kepco.co.kr/dis/serviceEndpoint/pfwjson";
+
+String responseMessage =  "";
+
+InputStream is   =  null;
+InputStreamReader isr =  null;
+BufferedReader br  =  null;
+
+StringBuffer sb = new StringBuffer();
+
+//이 부분이 https부분입니다.***************************
+//System.setProperty ( "java.protocol.handler.pkgs","com.sun.net.ssl.internal.www.protocol");
+//com.sun.net.ssl.internal.ssl.Provider provider = new com.sun.net.ssl.internal.ssl.Provider();
+//java.security.Security.addProvider(provider);
+//*****************************************************
+
+
+try{
+    URL httpsUrl  =  new URL(url);
+    URLConnection conn =  httpsUrl.openConnection();
+
+
+    conn.setUseCaches(false);
+    conn.setConnectTimeout(40000);
+    conn.setDoOutput(true);//post 방식 설정
+    conn.connect();
+    
+    
+    responseMessage = conn.getHeaderField(0);
+    System.out.println(responseMessage); // HTTP/1.1 200 OK 형식의 http 헤더 결과 코드가 출력됩니다.
+
+    is = conn.getInputStream();
+
+    isr = new InputStreamReader(is, "utf-8");
+    br = new BufferedReader(isr);
+
+    String line = null;
+    while((line=br.readLine()) != null){
+        sb.append(line);
+    }
+    
+    System.out.println(sb.toString());
+    out.println(sb.toString());
+    
+
+
+}catch(Exception e){
+    e.printStackTrace();
+}
+
+
+%>
