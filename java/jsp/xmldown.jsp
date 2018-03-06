@@ -3,13 +3,11 @@
     import="java.net.*,java.io.*,websquare.util.*"
 %><%!
 
-
-/*
+/* 컨셉
  1. w2xPath 로 넘어오는 경로의 파일이 로컬에 있으면 해당 파일을 내려주고
  2. 없으면 서버에서 내려받아서 파일로 저장한 다음 그 파일을 다시 읽어서 내려준다
 
 */
-
 
 // context root 의 물리적 경로 
 public static final String context = "/Users/songmingu/Documents/workspace_kepler_32/kepco/WebContent";
@@ -56,14 +54,11 @@ public void writeFile(String w2xPath, String content) throws IOException {
     System.out.println("파일쓰기 성공 : " + w2xPath);
 }
 
-
 public void makeDir(String w2xPath){
 	String[] parts = w2xPath.split(File.separator);
 	String dir = context;
 	for(int i=1; i<parts.length-1; i++){
-		
 		dir += File.separator + parts[i];
-		
 		File targetDir = new File(dir);
 		if(!targetDir.exists()) {    //디렉토리 없으면 생성.
 		  	targetDir.mkdirs();
@@ -75,9 +70,7 @@ public void makeDir(String w2xPath){
 }
 
 public String getRemoteFile(String w2xPath){
-	
 	String url = domain + w2xPath;
-
 	String resMsg =  "";
 	InputStream is   =  null;
 	InputStreamReader isr =  null;
@@ -86,7 +79,6 @@ public String getRemoteFile(String w2xPath){
 	
 	OutputStreamWriter wr = null;
 	try{
-		
 	    URL httpsUrl  =  new URL(url);
 	    URLConnection conn =  httpsUrl.openConnection();
 	
@@ -107,36 +99,19 @@ public String getRemoteFile(String w2xPath){
 	    while((line=br.readLine()) != null){
 	        sb.append(line+"\n");
 	    }
-	    
-	    //System.out.println(sb.toString());
-	    //out.println(sb.toString());
-	    
-	    
 	}catch(Exception e){
 	    e.printStackTrace();
 	}finally{
 		return sb.toString();
 	}
-	
-	
 }
 
 
 %><%
-
 String w2xPath = request.getParameter("w2xPath");
-//String context = getServletContext().getRealPath("/");
-
 
 String res = null;
 String filepath = context + w2xPath;
-//System.out.println("### context = " + context);
-//System.out.println("### w2xPath = " + w2xPath);
-
-
-
-	
-
 
 File file = new File(filepath);
 
