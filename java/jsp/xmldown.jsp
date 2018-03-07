@@ -55,7 +55,7 @@ public void writeFile(String w2xPath, String content) throws IOException {
 }
 
 public void makeDir(String w2xPath){
-	String[] parts = w2xPath.split(File.separator);
+	String[] parts = w2xPath.split("/");
 	String dir = context;
 	for(int i=1; i<parts.length-1; i++){
 		dir += File.separator + parts[i];
