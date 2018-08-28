@@ -3,7 +3,7 @@ function hackerlandRadioTransmitters(x, k) {
     arr = x.sort(function(a,b){return Number(a)-Number(b);});
     radio = x.map(()=>0);
 }
-function(i, k){
+function tmp(i, k){
     //i번째 요소에 radio 설치를 해야할 지 여부
 
     //  단순 거리 조건으로 체크
